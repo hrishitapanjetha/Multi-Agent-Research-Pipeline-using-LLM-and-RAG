@@ -468,46 +468,6 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ============================================================
-   STACK
-   ============================================================ */
-.stack { max-width: var(--maxw); margin: 0 auto; }
-.stack-grid {
-  list-style: none; margin: 0; padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.stack-grid li {
-  background: var(--bg-2);
-  padding: 32px 28px;
-  transition: background .3s var(--ease);
-  position: relative;
-}
-.stack-grid li:hover { background: #131318; }
-.stack-grid li strong {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(22px, 2.2vw, 26px);
-  display: block;
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
-}
-.stack-grid li span {
-  color: var(--ink-dim);
-  font-size: 14px;
-  line-height: 1.5;
-}
-.stack-grid li code {
-  font-family: var(--mono);
-  font-size: 12.5px;
-  color: var(--g2);
-}
-
-/* ============================================================
    WORKFLOW
    ============================================================ */
 .workflow { max-width: 860px; margin: 0 auto; }
@@ -1070,7 +1030,6 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
    ============================================================ */
 @media (max-width: 1024px) {
   .agent-grid { grid-template-columns: repeat(2, 1fr); }
-  .stack-grid { grid-template-columns: repeat(2, 1fr); }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(2) { border-right: 0; }
   .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
@@ -1079,7 +1038,6 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
   .nav { padding: 14px 20px; }
   .nav-links { display: none; }
   .agent-grid { grid-template-columns: 1fr; }
-  .stack-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .workflow-list li { grid-template-columns: 56px 1fr; gap: 14px; }
   .scroll-hint { display: none; }
