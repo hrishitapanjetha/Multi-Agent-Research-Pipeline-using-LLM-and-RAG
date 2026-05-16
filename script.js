@@ -193,8 +193,31 @@
       const kind = btn.dataset.download;
       if (kind === 'md') downloadFile(`${slug(lastReport.topic)}.md`, 'text/markdown;charset=utf-8', lastReport.markdown);
       else if (kind === 'html') downloadFile(`${slug(lastReport.topic)}.html`, 'text/html;charset=utf-8', lastReport.html);
-      else if (kind === 'pdf') window.print();
+      else if (kind === 'pdf') triggerPrint();
     });
+  });
+
+  /* ───── print: clone report into #print-root so the browser
+     can paginate it cleanly (the on-screen report-doc is inside a
+     scrollable container with max-height, which the print stylesheet
+     hid badly). ───── */
+  const printRoot = document.getElementById('print-root');
+  function triggerPrint() {
+    if (!printRoot || !reportDoc || !reportDoc.innerHTML.trim()) {
+      window.print();
+      return;
+    }
+    printRoot.innerHTML = reportDoc.innerHTML;
+    // give the browser a tick to apply layout before opening the dialog
+    setTimeout(() => window.print(), 50);
+  }
+  window.addEventListener('beforeprint', () => {
+    if (printRoot && reportDoc && !printRoot.innerHTML.trim() && reportDoc.innerHTML.trim()) {
+      printRoot.innerHTML = reportDoc.innerHTML;
+    }
+  });
+  window.addEventListener('afterprint', () => {
+    if (printRoot) printRoot.innerHTML = '';
   });
 
   /* ───── pipeline orchestrator ───── */

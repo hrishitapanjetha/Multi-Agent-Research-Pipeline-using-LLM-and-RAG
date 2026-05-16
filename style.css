@@ -919,17 +919,134 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
   font-size: 13px;
 }
 
-/* print: clean A4-ish output */
+/* print-only mirror of the report (populated by JS on beforeprint) */
+#print-root { display: none; }
+
 @media print {
-  body * { visibility: hidden !important; }
-  .report-doc, .report-doc * { visibility: visible !important; }
-  .report-doc {
-    position: absolute;
-    inset: 0;
-    max-height: none !important;
-    overflow: visible !important;
-    padding: 56px 64px !important;
-    background: #fff !important;
+  @page { margin: 16mm 14mm; size: A4; }
+  html, body { background: #fff !important; }
+  /* hide every direct child of body except the print mirror */
+  body > *:not(#print-root) { display: none !important; }
+  #print-root {
+    display: block !important;
+    color: #1a1a1a;
+    background: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+  /* report typography for print */
+  #print-root .doc-titleblock {
+    text-align: center;
+    border-bottom: 1pt solid #bbb;
+    padding-bottom: 14pt;
+    margin-bottom: 22pt;
+  }
+  #print-root .doc-eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8.5pt; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #777; margin-bottom: 10pt;
+  }
+  #print-root h1.doc-title {
+    font-family: "DM Serif Display", "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 26pt;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 10pt;
+    color: #111;
+  }
+  #print-root .doc-byline {
+    font-size: 9pt; color: #666; font-style: italic;
+  }
+  #print-root h2 {
+    font-family: "DM Serif Display", "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 14.5pt;
+    margin: 18pt 0 6pt;
+    color: #111;
+    border-bottom: 0.5pt solid #ccc;
+    padding-bottom: 4pt;
+    page-break-after: avoid;
+  }
+  #print-root h3 {
+    font-family: "DM Serif Display", "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 12pt;
+    font-style: italic;
+    margin: 12pt 0 4pt;
+    color: #222;
+    page-break-after: avoid;
+  }
+  #print-root p {
+    margin: 0 0 8pt;
+    color: #1a1a1a;
+    text-align: justify;
+    hyphens: auto;
+    orphans: 3; widows: 3;
+  }
+  #print-root ul, #print-root ol {
+    margin: 0 0 10pt; padding-left: 16pt;
+  }
+  #print-root li { margin-bottom: 3pt; }
+  #print-root .doc-abstract {
+    background: #f6f2e8;
+    border-left: 2pt solid #b8541e;
+    padding: 10pt 14pt;
+    margin: 0 0 18pt;
+    border-radius: 2pt;
+    page-break-inside: avoid;
+  }
+  #print-root .doc-abstract h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #777;
+    border: 0; padding: 0; margin: 0 0 6pt;
+  }
+  #print-root cite, #print-root .cite {
+    color: #b8541e;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.86em;
+  }
+  #print-root section { page-break-inside: avoid; }
+  #print-root .doc-references { page-break-before: auto; }
+  #print-root .doc-references ol {
+    list-style: none; padding-left: 0; counter-reset: ref;
+  }
+  #print-root .doc-references li {
+    counter-increment: ref;
+    padding-left: 30pt;
+    position: relative;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    margin-bottom: 5pt;
+    page-break-inside: avoid;
+  }
+  #print-root .doc-references li::before {
+    content: "[" counter(ref) "]";
+    position: absolute; left: 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 8.5pt;
+    color: #b8541e;
+  }
+  #print-root .doc-references a {
+    color: #1a1a1a;
+    word-break: break-all;
+    text-decoration: none;
+    border-bottom: 0.5pt solid #999;
+  }
+  #print-root .doc-foot {
+    margin-top: 24pt;
+    padding-top: 10pt;
+    border-top: 0.5pt solid #ccc;
+    font-size: 8.5pt;
+    color: #777;
+    text-align: center;
+    font-style: italic;
   }
 }
 
