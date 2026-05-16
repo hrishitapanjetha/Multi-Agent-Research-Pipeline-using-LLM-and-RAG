@@ -323,28 +323,6 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
 @keyframes scrollLine { 0% { transform: translateY(-100%); } 100% { transform: translateY(330%); } }
 
 /* ============================================================
-   MARQUEE
-   ============================================================ */
-.marquee {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  overflow: hidden;
-  padding: 22px 0 !important;
-}
-.marquee-track {
-  display: inline-flex;
-  gap: 36px;
-  align-items: center;
-  white-space: nowrap;
-  animation: marquee 38s linear infinite;
-  font-family: var(--serif);
-  font-size: clamp(20px, 2.4vw, 28px);
-  color: var(--ink-dim);
-}
-.marquee-track span:nth-child(even) { color: var(--g3); font-size: 1em; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* ============================================================
    STATS
    ============================================================ */
 .stats {
