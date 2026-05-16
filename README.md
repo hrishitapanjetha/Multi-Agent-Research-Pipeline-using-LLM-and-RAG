@@ -1,5 +1,7 @@
 # Multi-Agent Research Pipeline using LLM and RAG
 
+**Live demo →** https://hrishitapanjetha.github.io/Multi-Agent-Research-Pipeline-using-LLM-and-RAG/
+
 An autonomous Agentic AI research system that retrieves real academic papers from ArXiv, performs semantic search using FAISS, and generates a structured literature survey using a multi-agent Large Language Model (LLM) pipeline.
 
 ⸻
