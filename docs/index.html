@@ -53,10 +53,10 @@
     <span class="brand-name">Atelier<span class="brand-dot">.</span></span>
   </a>
   <nav class="nav-links" aria-label="Primary">
+    <a href="#studio">Studio</a>
     <a href="#agents">Agents</a>
     <a href="#pipeline">Pipeline</a>
     <a href="#stack">Stack</a>
-    <a href="#workflow">Workflow</a>
   </nav>
   <a class="cta-mini" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">
     <span>View on GitHub</span>
@@ -91,14 +91,14 @@
     </p>
 
     <div class="hero-cta">
-      <a class="btn-primary" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">
-        <span class="btn-label">Explore the code</span>
+      <a class="btn-primary" href="#studio">
+        <span class="btn-label">Try the studio</span>
         <span class="btn-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
       </a>
-      <a class="btn-ghost" href="#pipeline">
-        <span>See the pipeline</span>
+      <a class="btn-ghost" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">
+        <span>View on GitHub</span>
       </a>
     </div>
 
@@ -106,6 +106,126 @@
     <div class="scroll-hint" aria-hidden="true">
       <span>Scroll</span>
       <span class="scroll-bar"><span class="scroll-bar-inner"></span></span>
+    </div>
+  </section>
+
+  <!-- ───────────────────  STUDIO  ─────────────────── -->
+  <section id="studio" class="studio reveal">
+    <header class="section-head">
+      <div class="kicker"><span>00 — Run it</span></div>
+      <h2 class="section-title">Try the studio,<br/><em>compose a survey live.</em></h2>
+      <p class="section-lede">
+        Give the agents a topic. They&rsquo;ll pull real papers from OpenAlex, rank
+        them by relevance, draft a structured survey, and hand you back a
+        document you can read or download.
+      </p>
+    </header>
+
+    <div class="studio-card">
+      <form id="studio-form" class="studio-form" autocomplete="off">
+        <label class="studio-label" for="studio-topic">Research topic</label>
+        <div class="studio-input-row">
+          <input
+            id="studio-topic"
+            class="studio-input"
+            type="text"
+            name="topic"
+            placeholder="e.g. retrieval augmented generation for clinical notes"
+            spellcheck="false"
+            required
+          />
+          <button id="studio-run" class="btn-primary studio-run" type="submit">
+            <span class="btn-label">Generate survey</span>
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </div>
+        <div class="studio-examples" aria-label="Example topics">
+          <span class="studio-examples-lead">Try —</span>
+          <button type="button" class="chip" data-example="agentic memory architectures">agentic memory architectures</button>
+          <button type="button" class="chip" data-example="retrieval augmented generation">retrieval augmented generation</button>
+          <button type="button" class="chip" data-example="vision transformers for medical imaging">vision transformers for medical imaging</button>
+          <button type="button" class="chip" data-example="multi-agent reinforcement learning">multi-agent reinforcement learning</button>
+        </div>
+      </form>
+
+      <!-- Live progress timeline -->
+      <ol id="studio-progress" class="studio-progress" aria-live="polite" hidden>
+        <li class="step" data-step="planner">
+          <span class="step-no">01</span>
+          <div class="step-body">
+            <h4>Planner</h4>
+            <p class="step-msg">Waiting…</p>
+          </div>
+          <span class="step-status" aria-hidden="true"></span>
+        </li>
+        <li class="step" data-step="researcher">
+          <span class="step-no">02</span>
+          <div class="step-body">
+            <h4>Researcher</h4>
+            <p class="step-msg">Waiting…</p>
+          </div>
+          <span class="step-status" aria-hidden="true"></span>
+        </li>
+        <li class="step" data-step="retriever">
+          <span class="step-no">03</span>
+          <div class="step-body">
+            <h4>Retriever <span class="step-sub">(RAG)</span></h4>
+            <p class="step-msg">Waiting…</p>
+          </div>
+          <span class="step-status" aria-hidden="true"></span>
+        </li>
+        <li class="step" data-step="writer">
+          <span class="step-no">04</span>
+          <div class="step-body">
+            <h4>Writer</h4>
+            <p class="step-msg">Waiting…</p>
+          </div>
+          <span class="step-status" aria-hidden="true"></span>
+        </li>
+        <li class="step" data-step="editor">
+          <span class="step-no">05</span>
+          <div class="step-body">
+            <h4>Editor</h4>
+            <p class="step-msg">Waiting…</p>
+          </div>
+          <span class="step-status" aria-hidden="true"></span>
+        </li>
+        <li class="step" data-step="compositor">
+          <span class="step-no">06</span>
+          <div class="step-body">
+            <h4>Compositor</h4>
+            <p class="step-msg">Waiting…</p>
+          </div>
+          <span class="step-status" aria-hidden="true"></span>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Report viewer -->
+    <div id="studio-report" class="studio-report" hidden>
+      <div class="report-toolbar">
+        <div class="report-meta">
+          <span class="report-meta-label">Survey</span>
+          <span class="report-meta-topic" id="report-topic"></span>
+        </div>
+        <div class="report-actions">
+          <button type="button" class="btn-ghost btn-sm" data-download="md">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Markdown</span>
+          </button>
+          <button type="button" class="btn-ghost btn-sm" data-download="html">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>HTML</span>
+          </button>
+          <button type="button" class="btn-primary btn-sm" data-download="pdf">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 4v12m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>PDF</span>
+          </button>
+        </div>
+      </div>
+      <article id="report-doc" class="report-doc"></article>
     </div>
   </section>
 
@@ -335,26 +455,6 @@
   </section>
 
 </main>
-
-<!-- ───────────────────  FOOTER  ─────────────────── -->
-<footer class="foot">
-  <div class="foot-row">
-    <div class="foot-brand">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 40 40" width="22" height="22">
-          <circle cx="20" cy="20" r="16" fill="url(#markGrad)"/>
-        </svg>
-      </span>
-      <span>Atelier — a UI for the Multi-Agent Research Pipeline.</span>
-    </div>
-    <div class="foot-meta">
-      <span>MIT &middot; <a href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">github.com/hrishitapanjetha</a></span>
-    </div>
-  </div>
-  <div class="foot-credit">
-    <em>Designed for the repository. Hosted on GitHub Pages.</em>
-  </div>
-</footer>
 
 <script src="./script.js" defer></script>
 </body>
