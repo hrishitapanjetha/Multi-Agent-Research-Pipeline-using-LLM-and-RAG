@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b0b0d" />
+<title>Atelier — A Multi-Agent Research Pipeline</title>
+<meta name="description" content="An autonomous research agency. Six agents. Real ArXiv papers. Citation-grounded literature surveys, written end-to-end by LLMs over a RAG pipeline." />
+<meta property="og:title" content="Atelier — Multi-Agent Research Pipeline" />
+<meta property="og:description" content="Six agents. Real ArXiv papers. Citation-grounded literature surveys, written end-to-end." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="./style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='0.5' cy='0.5' r='0.5'%3E%3Cstop offset='0%25' stop-color='%23ffb37a'/%3E%3Cstop offset='55%25' stop-color='%23e0556b'/%3E%3Cstop offset='100%25' stop-color='%237a2a8a'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='13' fill='url(%23g)'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+<!-- shared SVG defs (so markGrad is reachable from any inline SVG) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="markGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd9b8"/>
+      <stop offset="45%" stop-color="#e0556b"/>
+      <stop offset="100%" stop-color="#5a1f7a"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<!-- grain + cursor light -->
+<div class="grain" aria-hidden="true"></div>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+
+<!-- top nav -->
+<header class="nav">
+  <a class="brand" href="#top" aria-label="Atelier home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="28" height="28">
+        <defs>
+          <radialGradient id="markGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffd9b8"/>
+            <stop offset="45%" stop-color="#e0556b"/>
+            <stop offset="100%" stop-color="#5a1f7a"/>
+          </radialGradient>
+        </defs>
+        <circle cx="20" cy="20" r="16" fill="url(#markGrad)"/>
+        <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(255,255,255,0.12)"/>
+      </svg>
+    </span>
+    <span class="brand-name">Atelier<span class="brand-dot">.</span></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#agents">Agents</a>
+    <a href="#pipeline">Pipeline</a>
+    <a href="#stack">Stack</a>
+    <a href="#workflow">Workflow</a>
+  </nav>
+  <a class="cta-mini" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">
+    <span>View on GitHub</span>
+    <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</header>
+
+<main id="top">
+
+  <!-- ───────────────────  HERO  ─────────────────── -->
+  <section class="hero">
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
+    <div class="orb orb-c" aria-hidden="true"></div>
+
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span>Another AI thing — <em>but actually new.</em></span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line"><span>A&nbsp;quiet</span></span>
+      <span class="line"><span><em>research&nbsp;agency</em></span></span>
+      <span class="line"><span>made&nbsp;of&nbsp;<span class="grad">six&nbsp;agents</span>.</span></span>
+    </h1>
+
+    <p class="hero-lede">
+      A multi-agent pipeline that reads ArXiv, thinks in vectors, and writes
+      citation-grounded literature surveys — all in one breath. Built on
+      Mistral-7B, FAISS, and a thoughtful chain of LLMs that argue with each other
+      so you don&rsquo;t have to.
+    </p>
+
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">
+        <span class="btn-label">Explore the code</span>
+        <span class="btn-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+      <a class="btn-ghost" href="#pipeline">
+        <span>See the pipeline</span>
+      </a>
+    </div>
+
+    <!-- scroll hint -->
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <span class="scroll-bar"><span class="scroll-bar-inner"></span></span>
+    </div>
+  </section>
+
+  <!-- ───────────────────  MARQUEE  ─────────────────── -->
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Agentic AI</span><span aria-hidden="true">✷</span>
+      <span>Retrieval Augmented Generation</span><span aria-hidden="true">✷</span>
+      <span>Mistral-7B-Instruct</span><span aria-hidden="true">✷</span>
+      <span>FAISS</span><span aria-hidden="true">✷</span>
+      <span>ArXiv</span><span aria-hidden="true">✷</span>
+      <span>Sentence Transformers</span><span aria-hidden="true">✷</span>
+      <span>4-bit Quantization</span><span aria-hidden="true">✷</span>
+
+      <span>Agentic AI</span><span aria-hidden="true">✷</span>
+      <span>Retrieval Augmented Generation</span><span aria-hidden="true">✷</span>
+      <span>Mistral-7B-Instruct</span><span aria-hidden="true">✷</span>
+      <span>FAISS</span><span aria-hidden="true">✷</span>
+      <span>ArXiv</span><span aria-hidden="true">✷</span>
+      <span>Sentence Transformers</span><span aria-hidden="true">✷</span>
+      <span>4-bit Quantization</span><span aria-hidden="true">✷</span>
+    </div>
+  </section>
+
+  <!-- ───────────────────  STATS  ─────────────────── -->
+  <section class="stats reveal">
+    <div class="stat">
+      <span class="stat-num" data-target="6">0</span>
+      <span class="stat-label">specialised agents</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" data-target="7">0</span><span class="stat-suffix">B</span>
+      <span class="stat-label">params, quantised to 4-bit</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" data-target="384">0</span><span class="stat-suffix">d</span>
+      <span class="stat-label">embeddings via MiniLM</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">papers, one query away</span>
+    </div>
+  </section>
+
+  <!-- ───────────────────  SIX AGENTS  ─────────────────── -->
+  <section id="agents" class="agents reveal">
+    <header class="section-head">
+      <div class="kicker"><span>01 — Cast</span></div>
+      <h2 class="section-title">Six agents,<br/><em>one continuous thought.</em></h2>
+      <p class="section-lede">
+        Each agent has a single job and a single voice. They hand work to one
+        another the way a small studio passes a manuscript across desks.
+      </p>
+    </header>
+
+    <ol class="agent-grid">
+      <li class="agent-card" data-agent="1">
+        <span class="agent-index">01</span>
+        <h3 class="agent-name">Planner</h3>
+        <p class="agent-role">Reads the topic. Extracts keywords. Drafts the research questions and the outline that everything else hangs on.</p>
+        <span class="agent-tag">— intent</span>
+      </li>
+      <li class="agent-card" data-agent="2">
+        <span class="agent-index">02</span>
+        <h3 class="agent-name">Researcher</h3>
+        <p class="agent-role">Reaches into ArXiv, pulls down papers and abstracts, and quietly builds the knowledge base the rest of the system will speak from.</p>
+        <span class="agent-tag">— sourcing</span>
+      </li>
+      <li class="agent-card" data-agent="3">
+        <span class="agent-index">03</span>
+        <h3 class="agent-name">Retriever <span class="agent-sub">(RAG)</span></h3>
+        <p class="agent-role">Embeds everything with MiniLM, stores the vectors in FAISS, and answers the harder question: <em>which paragraphs actually matter?</em></p>
+        <span class="agent-tag">— memory</span>
+      </li>
+      <li class="agent-card" data-agent="4">
+        <span class="agent-index">04</span>
+        <h3 class="agent-name">Writer</h3>
+        <p class="agent-role">Drafts the intro, literature review, methods comparison, challenges and conclusion — all grounded in the retrieved evidence.</p>
+        <span class="agent-tag">— voice</span>
+      </li>
+      <li class="agent-card" data-agent="5">
+        <span class="agent-index">05</span>
+        <h3 class="agent-name">Editor</h3>
+        <p class="agent-role">Tightens clarity, holds the tone steady, restructures where the logic has wandered. The quiet adult in the room.</p>
+        <span class="agent-tag">— craft</span>
+      </li>
+      <li class="agent-card" data-agent="6">
+        <span class="agent-index">06</span>
+        <h3 class="agent-name">Compositor</h3>
+        <p class="agent-role">Stitches the sections, writes the executive summary, and exports a finished research document, citations intact.</p>
+        <span class="agent-tag">— finish</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ───────────────────  PIPELINE DIAGRAM  ─────────────────── -->
+  <section id="pipeline" class="pipeline reveal">
+    <header class="section-head">
+      <div class="kicker"><span>02 — Flow</span></div>
+      <h2 class="section-title">The pipeline,<br/><em>at a glance.</em></h2>
+      <p class="section-lede">
+        A single thread runs from your topic to a finished survey. Each station
+        passes a more refined object to the next.
+      </p>
+    </header>
+
+    <div class="pipeline-stage" role="img" aria-label="Pipeline showing six agents connected by a flowing line">
+      <svg class="pipeline-svg" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#ffd9b8" stop-opacity="0"/>
+            <stop offset="20%" stop-color="#ffd9b8"/>
+            <stop offset="50%" stop-color="#e0556b"/>
+            <stop offset="85%" stop-color="#7a2a8a"/>
+            <stop offset="100%" stop-color="#7a2a8a" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="nodeGrad" cx="0.5" cy="0.4" r="0.6">
+            <stop offset="0%" stop-color="#fff5ea"/>
+            <stop offset="60%" stop-color="#e0556b"/>
+            <stop offset="100%" stop-color="#3a0e4a"/>
+          </radialGradient>
+        </defs>
+
+        <!-- baseline -->
+        <path class="pipe-base" d="M60 120 C 220 30, 420 210, 600 120 S 980 30, 1140 120" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.25"/>
+
+        <!-- animated wash -->
+        <path class="pipe-flow" d="M60 120 C 220 30, 420 210, 600 120 S 980 30, 1140 120" fill="none" stroke="url(#lineGrad)" stroke-width="1.5" stroke-dasharray="6 12"/>
+
+        <!-- nodes -->
+        <g class="pipe-nodes">
+          <g transform="translate(60 120)"><circle r="10" fill="url(#nodeGrad)"/><circle r="22" fill="none" stroke="rgba(255,255,255,0.12)"/></g>
+          <g transform="translate(276 86)"><circle r="10" fill="url(#nodeGrad)"/><circle r="22" fill="none" stroke="rgba(255,255,255,0.10)"/></g>
+          <g transform="translate(492 158)"><circle r="10" fill="url(#nodeGrad)"/><circle r="22" fill="none" stroke="rgba(255,255,255,0.10)"/></g>
+          <g transform="translate(708 86)"><circle r="10" fill="url(#nodeGrad)"/><circle r="22" fill="none" stroke="rgba(255,255,255,0.10)"/></g>
+          <g transform="translate(924 158)"><circle r="10" fill="url(#nodeGrad)"/><circle r="22" fill="none" stroke="rgba(255,255,255,0.10)"/></g>
+          <g transform="translate(1140 120)"><circle r="10" fill="url(#nodeGrad)"/><circle r="22" fill="none" stroke="rgba(255,255,255,0.14)"/></g>
+        </g>
+      </svg>
+
+      <ul class="pipe-labels" aria-hidden="true">
+        <li style="--x:60;"><span>Topic</span><em>User input</em></li>
+        <li style="--x:276;"><span>Planner</span><em>Outline</em></li>
+        <li style="--x:492;"><span>Researcher</span><em>ArXiv</em></li>
+        <li style="--x:708;"><span>Retriever</span><em>FAISS</em></li>
+        <li style="--x:924;"><span>Writer · Editor</span><em>Draft</em></li>
+        <li style="--x:1140;"><span>Compositor</span><em>Report</em></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ───────────────────  TERMINAL  ─────────────────── -->
+  <section class="terminal reveal">
+    <header class="section-head">
+      <div class="kicker"><span>03 — Field notes</span></div>
+      <h2 class="section-title">Watch it think,<br/><em>one paper at a time.</em></h2>
+    </header>
+
+    <div class="terminal-window" aria-hidden="true">
+      <div class="terminal-bar">
+        <span class="t-dot t-dot--r"></span>
+        <span class="t-dot t-dot--y"></span>
+        <span class="t-dot t-dot--g"></span>
+        <span class="terminal-title">atelier · multi-agent research pipeline</span>
+      </div>
+      <pre class="terminal-body"><code id="typer"></code><span class="caret">▍</span></pre>
+    </div>
+  </section>
+
+  <!-- ───────────────────  STACK  ─────────────────── -->
+  <section id="stack" class="stack reveal">
+    <header class="section-head">
+      <div class="kicker"><span>04 — Materials</span></div>
+      <h2 class="section-title">Built on a small,<br/><em>deliberate</em> stack.</h2>
+      <p class="section-lede">No frameworks of the month. Just the things that hold up under load.</p>
+    </header>
+
+    <ul class="stack-grid">
+      <li><strong>Mistral-7B-Instruct</strong><span>Reasoning core, served quantised so a single GPU is enough.</span></li>
+      <li><strong>Sentence Transformers</strong><span><code>all-MiniLM-L6-v2</code> — small, fast, surprisingly literate embeddings.</span></li>
+      <li><strong>FAISS</strong><span>Vector index for the retriever&rsquo;s long memory.</span></li>
+      <li><strong>ArXiv API</strong><span>The corpus. Papers in, abstracts out, citations intact.</span></li>
+      <li><strong>Hugging Face Transformers</strong><span>Model plumbing, tokenisation, generation.</span></li>
+      <li><strong>BitsAndBytes</strong><span>4-bit quantisation. Memory falls, throughput rises.</span></li>
+    </ul>
+  </section>
+
+  <!-- ───────────────────  WORKFLOW  ─────────────────── -->
+  <section id="workflow" class="workflow reveal">
+    <header class="section-head">
+      <div class="kicker"><span>05 — Process</span></div>
+      <h2 class="section-title">From a sentence,<br/><em>to a survey.</em></h2>
+    </header>
+
+    <ol class="workflow-list">
+      <li><span class="wf-no">01</span><div><h4>You write a topic.</h4><p>Anything from <em>&ldquo;agentic memory architectures&rdquo;</em> to <em>&ldquo;FAISS vs. HNSW for legal corpora&rdquo;</em>.</p></div></li>
+      <li><span class="wf-no">02</span><div><h4>The Planner sketches a plan.</h4><p>It distils keywords, drafts research questions, and proposes the spine of the survey.</p></div></li>
+      <li><span class="wf-no">03</span><div><h4>The Researcher pulls real papers.</h4><p>Live calls to the ArXiv API. Abstracts and metadata flow into a working knowledge base.</p></div></li>
+      <li><span class="wf-no">04</span><div><h4>FAISS does semantic search.</h4><p>Everything is embedded, indexed, and retrieved by meaning rather than keyword.</p></div></li>
+      <li><span class="wf-no">05</span><div><h4>The Writer drafts. The Editor refines.</h4><p>Sections appear: introduction, literature review, methods, challenges, conclusion — grounded in retrieved evidence.</p></div></li>
+      <li><span class="wf-no">06</span><div><h4>The Compositor delivers.</h4><p>Final assembly. Executive summary on top. A clean, exportable research document at the bottom.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- ───────────────────  CTA  ─────────────────── -->
+  <section class="cta reveal">
+    <div class="cta-inner">
+      <h2 class="cta-title">
+        Read the code. <em>Run it. Break it.</em>
+      </h2>
+      <p class="cta-sub">
+        The full pipeline lives in a single repository — agents, retrieval,
+        model loading, and the script that ties it all together.
+      </p>
+      <div class="cta-row">
+        <a class="btn-primary" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">
+          <span class="btn-label">Open the repository</span>
+          <span class="btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="btn-ghost" href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG/blob/main/main.py" target="_blank" rel="noopener">
+          <span>Read main.py</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ───────────────────  FOOTER  ─────────────────── -->
+<footer class="foot">
+  <div class="foot-row">
+    <div class="foot-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="22" height="22">
+          <circle cx="20" cy="20" r="16" fill="url(#markGrad)"/>
+        </svg>
+      </span>
+      <span>Atelier — a UI for the Multi-Agent Research Pipeline.</span>
+    </div>
+    <div class="foot-meta">
+      <span>MIT &middot; <a href="https://github.com/hrishitapanjetha/Multi-Agent-Research-Pipeline-using-LLM-and-RAG" target="_blank" rel="noopener">github.com/hrishitapanjetha</a></span>
+    </div>
+  </div>
+  <div class="foot-credit">
+    <em>Designed for the repository. Hosted on GitHub Pages.</em>
+  </div>
+</footer>
+
+<script src="./script.js" defer></script>
+</body>
+</html>
