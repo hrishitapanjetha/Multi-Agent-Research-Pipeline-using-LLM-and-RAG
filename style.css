@@ -200,12 +200,11 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
 @keyframes float-c { from { transform: translate(0,0) scale(1); } to { transform: translate(20px, -50px) scale(1.06); } }
 
 .hero-title {
-  font-family: "Fraunces", "Instrument Serif", "Times New Roman", serif;
+  font-family: "DM Serif Display", "Instrument Serif", "Times New Roman", serif;
   font-weight: 400;
-  font-variation-settings: "opsz" 144, "SOFT" 30, "wght" 380;
-  font-size: clamp(48px, 10vw, 148px);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  font-size: clamp(48px, 9.5vw, 132px);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
   margin: 0;
   text-align: center;
   display: flex;
@@ -213,10 +212,10 @@ section { padding: clamp(64px, 8vw, 140px) var(--pad); position: relative; }
   align-items: center;
   gap: 0;
   max-width: min(1100px, 92vw);
+  color: var(--ink);
 }
 .hero-title .line {
   display: block;
-  overflow: hidden;
   white-space: nowrap;
   opacity: 0;
   transform: translateY(28px);
